@@ -1,37 +1,22 @@
-import { useState } from 'react'
-import { createGlobalStyle } from 'styled-components'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import Formulario from './components/Formulario'
-import ListaVagas from './components/ListaVagas'
-
-// ── Estilos globais com Styled Components ──
-const GlobalStyle = createGlobalStyle`
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
-    color: #333333;
-    line-height: 1.6;
-  }
-`
+import { Provider } from 'react-redux'
+import { store } from './store'
+import GlobalCss from './styles'
+import Cabecalho from './containers/Cabecalho'
+import Hero from './containers/Hero'
+import Formulario from './containers/Formulario'
+import ListaVagas from './containers/ListaVagas'
 
 function App() {
-  const [filtro, setFiltro] = useState('')
-
   return (
-    <>
-      <GlobalStyle />
-      <Header />
-      <Hero />
-      <Formulario onBuscar={setFiltro} />
-      <ListaVagas filtro={filtro} />
-    </>
+    <Provider store={store}>
+      <GlobalCss />
+      <div className="App">
+        <Cabecalho />
+        <Hero />
+        <Formulario />
+        <ListaVagas />
+      </div>
+    </Provider>
   )
 }
 
